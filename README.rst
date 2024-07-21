@@ -57,13 +57,35 @@ from `PyPI <https://pypi.org/project>`_
   pipx ensurepath
   pipx install discord-dumper
 
+How to get an HAR File ?
+########################
+
+1. Go on your favorite browser
+2. Press F12
+3. Go to Network tab
+4. Check Disable cache
+5. Check Preserve log
+6. Go on discord.com and where you want to collect data
+7. Click on an event
+8. Save all as HAR with content
+
 Usage
 #####
 
 ..  code-block:: bash
 
-  discord-dumper --version
   discord-dumper --help
+  discord-dumper discord.com.har --fetch
+
+Dump content
+############
+
+- `events.json`: All events sended and receive by your applications
+- `images`: All images downloaded from `cdn.discordapp.com`
+- `guilds`: Partial guild content
+- `private_channels`: Partial private channels
+- `connected_accounts`: All your connected accounts
+- `user`: Some users
 
 Development
 ###########

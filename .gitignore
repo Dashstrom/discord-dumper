@@ -108,3 +108,7 @@ public/
 
 # Ruff cache
 .ruff_cache/
+
+# Dont push root HAR
+/*.har
+/discord/

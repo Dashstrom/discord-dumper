@@ -5,7 +5,8 @@ import logging
 import sys
 from typing import NoReturn, Optional, Sequence
 
-from .core import __issues__, __summary__, __version__, hello
+from .core import __issues__, __summary__, __version__
+from .dumper import dump
 
 LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 logger = logging.getLogger(__name__)
@@ -30,31 +31,32 @@ def get_parser() -> argparse.ArgumentParser:
         action="version",
         version=f"%(prog)s, version {__version__}",
     )
-
-    # Add subparsers
-    subparsers = parser.add_subparsers(
-        help="desired action to perform",
-        dest="action",
-        required=True,
-    )
-
-    # Add parent parser with common arguments
-    parent_parser = HelpArgumentParser(add_help=False)
-    parent_parser.add_argument(
+    parser.add_argument(
         "-v",
         "--verbose",
         help="verbose mode, enable INFO and DEBUG messages.",
         action="store_true",
         required=False,
     )
-
-    # Parser of hello command
-    hello_parser = subparsers.add_parser(
-        "hello",
-        parents=[parent_parser],
-        help="greet the user.",
+    parser.add_argument("path")
+    parser.add_argument(
+        "--no-pretty",
+        dest="pretty",
+        action="store_false",
+        help="Indent and add space in json file.",
     )
-    hello_parser.add_argument("--name", help="name to greeting")
+    parser.add_argument(
+        "--no-images",
+        dest="images",
+        action="store_false",
+        help="Don't save images.",
+    )
+    parser.add_argument(
+        "--fetch",
+        action="store_true",
+        help="Fetch images for best quality.",
+    )
+    parser.set_defaults(images=True, pretty=True)
     return parser
 
 
@@ -73,10 +75,12 @@ def entrypoint(argv: Optional[Sequence[str]] = None) -> None:
         parser = get_parser()
         args = parser.parse_args(argv)
         setup_logging(args.verbose)
-        if args.action == "hello":
-            print(hello(args.name))  # noqa: T201
-        else:
-            parser.error("No command specified")
+        dump(
+            args.path,
+            pretty=args.pretty,
+            images=args.images,
+            fetch=args.fetch,
+        )
     except Exception as err:  # NoQA: BLE001
         logger.critical("Unexpected error", exc_info=err)
         logger.critical("Please, report this error to %s.", __issues__)
