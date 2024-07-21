@@ -27,7 +27,7 @@ Discord Dumper
   :target: https://pypi.org/project/discord-dumper
   :alt: Python : versions
 
-.. |discord| image:: https://img.shields.io/badge/Discord-Discord%20Dumper-5865F2?style=flat&logo=discord&logoColor=white
+.. |discord| image:: https://img.shields.io/badge/Discord-dashstrom-5865F2?style=flat&logo=discord&logoColor=white
   :target: https://dsc.gg/dashstrom
   :alt: Discord
 
@@ -66,7 +66,7 @@ How to get an HAR File ?
 4. Check Disable cache
 5. Check Preserve log
 6. Go on discord.com and where you want to collect data
-7. Click on an event
+7. Right-click on an event in the Network tab
 8. Save all as HAR with content
 
 Usage
@@ -80,12 +80,12 @@ Usage
 Dump content
 ############
 
-- `events.json`: All events sended and receive by your applications
-- `images`: All images downloaded from `cdn.discordapp.com`
-- `guilds`: Partial guild content
-- `private_channels`: Partial private channels
-- `connected_accounts`: All your connected accounts
-- `user`: Some users
+- :bash:`events.json`: All events sended and receive by your applications
+- :bash:`images`: All images downloaded from :bash:`cdn.discordapp.com`
+- :bash:`guilds`: Partial guild content
+- :bash:`private_channels`: Partial private channels
+- :bash:`connected_accounts`: All your connected accounts
+- :bash:`user`: Some users
 
 Development
 ###########
